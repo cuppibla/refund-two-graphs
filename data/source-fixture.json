@@ -1,0 +1,37 @@
+{
+  "source": "refund_static.py",
+  "source_sha256": "b9848c38449e9d1db8aab1711883dca010c0d6fb4104cb9e0d6b14f37ff27ff4",
+  "classification": "Original fictional demo fixture; not production customer data.",
+  "sections": {
+    "fetch_order": {
+      "values": {
+        "order_id": "A-1043",
+        "amount_usd": 62.0,
+        "placed_days_ago": 12,
+        "item": "trail running shoes"
+      },
+      "source_line": 36
+    },
+    "fetch_payment": {
+      "values": {
+        "method": "visa",
+        "settled": true,
+        "chargeback_open": false
+      },
+      "source_line": 41
+    },
+    "fetch_history": {
+      "values": {
+        "account_age_days": 412,
+        "prior_refunds_12mo": 1
+      },
+      "source_line": 45
+    }
+  },
+  "technical_ids": {
+    "customer_id": "customer_for_A-1043",
+    "payment_id": "payment_for_A-1043",
+    "history_id": "history_for_A-1043"
+  },
+  "normalization_note": "Technical IDs and relationship rows are newly assigned for this prototype. Business values are copied exactly from the original case. The one prior refund is a summary, not a reconstructed transaction."
+}

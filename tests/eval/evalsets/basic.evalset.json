@@ -1,0 +1,47 @@
+{
+  "eval_set_id": "refund_replies",
+  "name": "Grounded refund decisions",
+  "description": "Isolated response-agent checks using cases from the two successful live Workflow runs. Does not evaluate graph execution.",
+  "eval_cases": [
+    {
+      "eval_id": "approve_grounded_reply",
+      "conversation": [
+        {
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "{\"order_id\": \"A-1043\", \"item\": \"trail running shoes\", \"amount_usd\": 62.0, \"placed_days_ago\": 12, \"payment_id\": \"payment_for_A-1043\", \"method\": \"visa\", \"settled\": true, \"chargeback_open\": false, \"customer_id\": \"customer_for_A-1043\", \"account_age_days\": 412, \"prior_refunds_12mo\": 1, \"policy_route\": \"MANUAL_REVIEW\", \"decision_reason\": \"Automatic approval requires an amount under $50 and fewer than 3 prior refunds; this case needs review.\", \"decision\": \"APPROVED\", \"reviewer_note\": \"Approved as a goodwill exception for this demonstration.\"}"
+              }
+            ]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "refund_demo_eval",
+        "state": {}
+      }
+    },
+    {
+      "eval_id": "decline_grounded_reply",
+      "conversation": [
+        {
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "{\"order_id\": \"A-1043\", \"item\": \"trail running shoes\", \"amount_usd\": 62.0, \"placed_days_ago\": 12, \"payment_id\": \"payment_for_A-1043\", \"method\": \"visa\", \"settled\": true, \"chargeback_open\": false, \"customer_id\": \"customer_for_A-1043\", \"account_age_days\": 412, \"prior_refunds_12mo\": 1, \"policy_route\": \"MANUAL_REVIEW\", \"decision_reason\": \"Automatic approval requires an amount under $50 and fewer than 3 prior refunds; this case needs review.\", \"decision\": \"DECLINED\", \"reviewer_note\": \"The reviewer declined the discretionary exception for this demonstration.\"}"
+              }
+            ]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "refund_demo_eval",
+        "state": {}
+      }
+    }
+  ]
+}

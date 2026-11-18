@@ -1,0 +1,85 @@
+{
+  "checked_at_utc": "2026-10-16T03:21:22.827932+00:00",
+  "source_fixture": {
+    "classification": "Original fictional demo fixture; not production customer data.",
+    "original_sha256": "b9848c38449e9d1db8aab1711883dca010c0d6fb4104cb9e0d6b14f37ff27ff4",
+    "original_file_unchanged": true
+  },
+  "offline_tests": {
+    "passed": 15,
+    "scope": "Policy boundaries, evidence validation, concurrency/join ordering, review pause and both resume branches, no repeated fetch, duplicate review rejection, missing history",
+    "models_disabled": true
+  },
+  "live_runs": [
+    {
+      "outcome": "approve",
+      "status": "complete",
+      "policy_route": "MANUAL_REVIEW",
+      "selected_node": "approve_notice",
+      "query_job_ids": [
+        "99a53923-0d00-4e3c-93a8-250c8c365af1",
+        "6e244bc3-1025-49da-af62-ebf1a3e2e9fb",
+        "5901a942-59ab-4633-bf26-a140d023edac"
+      ],
+      "model_enabled": true,
+      "evidence": "live-approve.json"
+    },
+    {
+      "outcome": "decline",
+      "status": "complete",
+      "policy_route": "MANUAL_REVIEW",
+      "selected_node": "denial_notice",
+      "query_job_ids": [
+        "658a87d9-536a-4103-8d60-2274c865f521",
+        "6dd3fa81-35f7-40c3-83a0-898c6e14040d",
+        "bea19779-b364-4b24-9d75-7398973c3564"
+      ],
+      "model_enabled": true,
+      "evidence": "live-decline.json"
+    }
+  ],
+  "adk_reply_evaluation": {
+    "cases": 2,
+    "passed": 2,
+    "rubrics": [
+      "decision",
+      "grounding",
+      "payment_boundary"
+    ],
+    "score_per_case": 1.0,
+    "actual_model": "gemini-3-flash-preview",
+    "evidence": "adk-eval-result.json"
+  },
+  "browser_verification": {
+    "actions": [
+      "Read live graph",
+      "Run workflow",
+      "Observe manual-review pause before generation",
+      "Enter reviewer reason and approve",
+      "Observe actual draft",
+      "Switch three teaching views",
+      "Expand combined diagram"
+    ],
+    "screenshots": [
+      "ui-review.jpg",
+      "ui-complete.jpg",
+      "ui-together.jpg"
+    ]
+  },
+  "limits": [
+    "Original fictional fixture, not production data",
+    "No payment/email actions",
+    "In-memory sessions only",
+    "No transactional snapshot across the three reads",
+    "No production performance, cost, security, or adversarial evaluation",
+    "Two model-judged cases do not establish broad reliability"
+  ],
+  "live_unknown_order": {
+    "result": "Explicit zero-record error; no case returned",
+    "evidence": "unknown-order.json"
+  },
+  "static_checks": [
+    "Ruff E9/F63/F7/F82 passed",
+    "JavaScript syntax passed"
+  ]
+}

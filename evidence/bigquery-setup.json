@@ -1,0 +1,138 @@
+{
+  "checked_at_utc": "2026-10-16T02:58:34.101602+00:00",
+  "setup_job_id": "fa4f90e3-c31a-4bbf-99f4-4f9f8b246937",
+  "dataset": "neon-emitter-458622-e3.refund_graph_demo_20261016",
+  "graph": "neon-emitter-458622-e3.refund_graph_demo_20261016.RefundGraph",
+  "source_sha256": "b9848c38449e9d1db8aab1711883dca010c0d6fb4104cb9e0d6b14f37ff27ff4",
+  "query": {
+    "kind": "context",
+    "job_id": "9f6aa3d5-c613-484c-bdc1-660805300f2a",
+    "location": "US",
+    "project": "neon-emitter-458622-e3",
+    "started_at_utc": "2026-10-16T02:58:26.321755+00:00",
+    "sql": "GRAPH `neon-emitter-458622-e3.refund_graph_demo_20261016.RefundGraph`\nMATCH payment_path = (c:Customer)-[:PLACED]->(o:`Order`)-[:HAS_PAYMENT]->(p:Payment),\n      history_path = (c)-[:HAS_HISTORY]->(h:RefundHistory)\nWHERE o.order_id = @order_id\nRETURN c.customer_id AS customer_id, c.account_age_days AS account_age_days,\n       o.order_id AS order_id, o.item AS item, o.amount_usd AS amount_usd,\n       o.placed_days_ago AS placed_days_ago, p.method AS method,\n       p.settled AS settled, p.chargeback_open AS chargeback_open,\n       h.prior_refunds_12mo AS prior_refunds_12mo,\n       TO_JSON(payment_path) AS payment_path, TO_JSON(history_path) AS history_path",
+    "parameters": {
+      "order_id": "A-1043"
+    },
+    "row_count": 1,
+    "rows": [
+      {
+        "customer_id": "customer_for_A-1043",
+        "account_age_days": 412,
+        "order_id": "A-1043",
+        "item": "trail running shoes",
+        "amount_usd": 62.0,
+        "placed_days_ago": 12,
+        "method": "visa",
+        "settled": true,
+        "chargeback_open": false,
+        "prior_refunds_12mo": 1,
+        "payment_path": [
+          {
+            "identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz",
+            "kind": "node",
+            "labels": [
+              "Customer"
+            ],
+            "properties": {
+              "account_age_days": 412,
+              "customer_id": "customer_for_A-1043"
+            }
+          },
+          {
+            "destination_node_identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+            "identifier": "rjQAAAARAAAAKQAAAKYEAAAAAAAAAKwTAAAAY3VzdG9tZXJfZm9yX0EtMTA0M6wGAAAAQS0xMDQzriUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQzrhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+            "kind": "edge",
+            "labels": [
+              "PLACED"
+            ],
+            "properties": {
+              "customer_id": "customer_for_A-1043",
+              "order_id": "A-1043"
+            },
+            "source_node_identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz"
+          },
+          {
+            "identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+            "kind": "node",
+            "labels": [
+              "Order"
+            ],
+            "properties": {
+              "amount_usd": 62.0,
+              "item": "trail running shoes",
+              "order_id": "A-1043",
+              "placed_days_ago": 12
+            }
+          },
+          {
+            "destination_node_identifier": "riQAAAANAAAApgIAAAAAAAAArBIAAABwYXltZW50X2Zvcl9BLTEwNDM=",
+            "identifier": "rjMAAAARAAAAHAAAAKYFAAAAAAAAAKwGAAAAQS0xMDQzrBIAAABwYXltZW50X2Zvcl9BLTEwNDOuGAAAAA0AAACmAQAAAAAAAACsBgAAAEEtMTA0M64kAAAADQAAAKYCAAAAAAAAAKwSAAAAcGF5bWVudF9mb3JfQS0xMDQz",
+            "kind": "edge",
+            "labels": [
+              "HAS_PAYMENT"
+            ],
+            "properties": {
+              "order_id": "A-1043",
+              "payment_id": "payment_for_A-1043"
+            },
+            "source_node_identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM="
+          },
+          {
+            "identifier": "riQAAAANAAAApgIAAAAAAAAArBIAAABwYXltZW50X2Zvcl9BLTEwNDM=",
+            "kind": "node",
+            "labels": [
+              "Payment"
+            ],
+            "properties": {
+              "chargeback_open": false,
+              "method": "visa",
+              "payment_id": "payment_for_A-1043",
+              "settled": true
+            }
+          }
+        ],
+        "history_path": [
+          {
+            "identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz",
+            "kind": "node",
+            "labels": [
+              "Customer"
+            ],
+            "properties": {
+              "account_age_days": 412,
+              "customer_id": "customer_for_A-1043"
+            }
+          },
+          {
+            "destination_node_identifier": "riQAAAANAAAApgMAAAAAAAAArBIAAABoaXN0b3J5X2Zvcl9BLTEwNDM=",
+            "identifier": "rkAAAAARAAAAKQAAAKYGAAAAAAAAAKwTAAAAY3VzdG9tZXJfZm9yX0EtMTA0M6wSAAAAaGlzdG9yeV9mb3JfQS0xMDQzriUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQzriQAAAANAAAApgMAAAAAAAAArBIAAABoaXN0b3J5X2Zvcl9BLTEwNDM=",
+            "kind": "edge",
+            "labels": [
+              "HAS_HISTORY"
+            ],
+            "properties": {
+              "customer_id": "customer_for_A-1043",
+              "history_id": "history_for_A-1043"
+            },
+            "source_node_identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz"
+          },
+          {
+            "identifier": "riQAAAANAAAApgMAAAAAAAAArBIAAABoaXN0b3J5X2Zvcl9BLTEwNDM=",
+            "kind": "node",
+            "labels": [
+              "RefundHistory"
+            ],
+            "properties": {
+              "history_id": "history_for_A-1043",
+              "prior_refunds_12mo": 1
+            }
+          }
+        ]
+      }
+    ],
+    "total_bytes_processed": 228,
+    "cache_hit": false
+  },
+  "verification": "All original business values match; all seven tables have one row."
+}

@@ -1,0 +1,6 @@
+{
+  "order_id": "A-NOT-IN-FIXTURE",
+  "expected": "explicit missing-record error",
+  "actual": "context: expected one record for A-NOT-IN-FIXTURE, found 0. No decision made.",
+  "decision_made": false
+}

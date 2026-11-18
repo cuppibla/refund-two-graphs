@@ -1,0 +1,282 @@
+{
+  "id": "0c575eb4-0a70-42b3-b02b-6d1b726cd9f5",
+  "order_id": "A-1043",
+  "status": "complete",
+  "started_at_utc": "2026-10-16T03:07:03.652203+00:00",
+  "nodes": {
+    "fetch_order": "done",
+    "fetch_payment": "done",
+    "fetch_history": "done",
+    "join_case": "done",
+    "route_refund": "done",
+    "human_review": "done",
+    "denial_notice": "done"
+  },
+  "trace": [
+    {
+      "seconds": 0.011,
+      "node": "fetch_order",
+      "status": "running",
+      "detail": "Querying BigQuery Graph for A-1043"
+    },
+    {
+      "seconds": 0.011,
+      "node": "fetch_payment",
+      "status": "running",
+      "detail": "Querying BigQuery Graph for A-1043"
+    },
+    {
+      "seconds": 0.011,
+      "node": "fetch_history",
+      "status": "running",
+      "detail": "Querying BigQuery Graph for A-1043"
+    },
+    {
+      "seconds": 1.533,
+      "node": "fetch_payment",
+      "status": "done",
+      "detail": "658a87d9-536a-4103-8d60-2274c865f521"
+    },
+    {
+      "seconds": 2.211,
+      "node": "fetch_order",
+      "status": "done",
+      "detail": "6dd3fa81-35f7-40c3-83a0-898c6e14040d"
+    },
+    {
+      "seconds": 2.366,
+      "node": "fetch_history",
+      "status": "done",
+      "detail": "bea19779-b364-4b24-9d75-7398973c3564"
+    },
+    {
+      "seconds": 2.371,
+      "node": "join_case",
+      "status": "done",
+      "detail": "All three fetches completed"
+    },
+    {
+      "seconds": 2.371,
+      "node": "route_refund",
+      "status": "done",
+      "detail": "MANUAL_REVIEW"
+    },
+    {
+      "seconds": 2.371,
+      "node": "human_review",
+      "status": "waiting",
+      "detail": "Waiting for an actual reviewer choice in the browser"
+    },
+    {
+      "seconds": 2.379,
+      "node": "human_review",
+      "status": "done",
+      "detail": "DECLINED"
+    },
+    {
+      "seconds": 2.38,
+      "node": "denial_notice",
+      "status": "running",
+      "detail": "Gemini is drafting the response from the decided case"
+    },
+    {
+      "seconds": 6.164,
+      "node": "denial_notice",
+      "status": "done",
+      "detail": "Draft generated; no message sent or payment executed"
+    }
+  ],
+  "evidence": {
+    "payment": {
+      "kind": "payment",
+      "job_id": "658a87d9-536a-4103-8d60-2274c865f521",
+      "location": "US",
+      "project": "neon-emitter-458622-e3",
+      "started_at_utc": "2026-10-16T03:07:03.664150+00:00",
+      "sql": "GRAPH `neon-emitter-458622-e3.refund_graph_demo_20261016.RefundGraph`\nMATCH evidence = (o:`Order`)-[:HAS_PAYMENT]->(p:Payment)\nWHERE o.order_id = @order_id\nRETURN o.order_id AS order_id, p.payment_id AS payment_id,\n       p.method AS method, p.settled AS settled,\n       p.chargeback_open AS chargeback_open, TO_JSON(evidence) AS evidence_path",
+      "parameters": {
+        "order_id": "A-1043"
+      },
+      "row_count": 1,
+      "rows": [
+        {
+          "order_id": "A-1043",
+          "payment_id": "payment_for_A-1043",
+          "method": "visa",
+          "settled": true,
+          "chargeback_open": false,
+          "evidence_path": [
+            {
+              "identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+              "kind": "node",
+              "labels": [
+                "Order"
+              ],
+              "properties": {
+                "amount_usd": 62.0,
+                "item": "trail running shoes",
+                "order_id": "A-1043",
+                "placed_days_ago": 12
+              }
+            },
+            {
+              "destination_node_identifier": "riQAAAANAAAApgIAAAAAAAAArBIAAABwYXltZW50X2Zvcl9BLTEwNDM=",
+              "identifier": "rjMAAAARAAAAHAAAAKYFAAAAAAAAAKwGAAAAQS0xMDQzrBIAAABwYXltZW50X2Zvcl9BLTEwNDOuGAAAAA0AAACmAQAAAAAAAACsBgAAAEEtMTA0M64kAAAADQAAAKYCAAAAAAAAAKwSAAAAcGF5bWVudF9mb3JfQS0xMDQz",
+              "kind": "edge",
+              "labels": [
+                "HAS_PAYMENT"
+              ],
+              "properties": {
+                "order_id": "A-1043",
+                "payment_id": "payment_for_A-1043"
+              },
+              "source_node_identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM="
+            },
+            {
+              "identifier": "riQAAAANAAAApgIAAAAAAAAArBIAAABwYXltZW50X2Zvcl9BLTEwNDM=",
+              "kind": "node",
+              "labels": [
+                "Payment"
+              ],
+              "properties": {
+                "chargeback_open": false,
+                "method": "visa",
+                "payment_id": "payment_for_A-1043",
+                "settled": true
+              }
+            }
+          ]
+        }
+      ],
+      "total_bytes_processed": 101,
+      "cache_hit": false
+    },
+    "order": {
+      "kind": "order",
+      "job_id": "6dd3fa81-35f7-40c3-83a0-898c6e14040d",
+      "location": "US",
+      "project": "neon-emitter-458622-e3",
+      "started_at_utc": "2026-10-16T03:07:03.663630+00:00",
+      "sql": "GRAPH `neon-emitter-458622-e3.refund_graph_demo_20261016.RefundGraph`\nMATCH (o:`Order`)\nWHERE o.order_id = @order_id\nRETURN o.order_id AS order_id, o.item AS item,\n       o.amount_usd AS amount_usd, o.placed_days_ago AS placed_days_ago",
+      "parameters": {
+        "order_id": "A-1043"
+      },
+      "row_count": 1,
+      "rows": [
+        {
+          "order_id": "A-1043",
+          "item": "trail running shoes",
+          "amount_usd": 62.0,
+          "placed_days_ago": 12
+        }
+      ],
+      "total_bytes_processed": 45,
+      "cache_hit": false
+    },
+    "history": {
+      "kind": "history",
+      "job_id": "bea19779-b364-4b24-9d75-7398973c3564",
+      "location": "US",
+      "project": "neon-emitter-458622-e3",
+      "started_at_utc": "2026-10-16T03:07:03.670102+00:00",
+      "sql": "GRAPH `neon-emitter-458622-e3.refund_graph_demo_20261016.RefundGraph`\nMATCH evidence = (o:`Order`)<-[:PLACED]-(c:Customer)-[:HAS_HISTORY]->(h:RefundHistory)\nWHERE o.order_id = @order_id\nRETURN o.order_id AS order_id, c.customer_id AS customer_id,\n       c.account_age_days AS account_age_days,\n       h.prior_refunds_12mo AS prior_refunds_12mo,\n       TO_JSON(evidence) AS evidence_path",
+      "parameters": {
+        "order_id": "A-1043"
+      },
+      "row_count": 1,
+      "rows": [
+        {
+          "order_id": "A-1043",
+          "customer_id": "customer_for_A-1043",
+          "account_age_days": 412,
+          "prior_refunds_12mo": 1,
+          "evidence_path": [
+            {
+              "identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+              "kind": "node",
+              "labels": [
+                "Order"
+              ],
+              "properties": {
+                "amount_usd": 62.0,
+                "item": "trail running shoes",
+                "order_id": "A-1043",
+                "placed_days_ago": 12
+              }
+            },
+            {
+              "destination_node_identifier": "rhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+              "identifier": "rjQAAAARAAAAKQAAAKYEAAAAAAAAAKwTAAAAY3VzdG9tZXJfZm9yX0EtMTA0M6wGAAAAQS0xMDQzriUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQzrhgAAAANAAAApgEAAAAAAAAArAYAAABBLTEwNDM=",
+              "kind": "edge",
+              "labels": [
+                "PLACED"
+              ],
+              "properties": {
+                "customer_id": "customer_for_A-1043",
+                "order_id": "A-1043"
+              },
+              "source_node_identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz"
+            },
+            {
+              "identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz",
+              "kind": "node",
+              "labels": [
+                "Customer"
+              ],
+              "properties": {
+                "account_age_days": 412,
+                "customer_id": "customer_for_A-1043"
+              }
+            },
+            {
+              "destination_node_identifier": "riQAAAANAAAApgMAAAAAAAAArBIAAABoaXN0b3J5X2Zvcl9BLTEwNDM=",
+              "identifier": "rkAAAAARAAAAKQAAAKYGAAAAAAAAAKwTAAAAY3VzdG9tZXJfZm9yX0EtMTA0M6wSAAAAaGlzdG9yeV9mb3JfQS0xMDQzriUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQzriQAAAANAAAApgMAAAAAAAAArBIAAABoaXN0b3J5X2Zvcl9BLTEwNDM=",
+              "kind": "edge",
+              "labels": [
+                "HAS_HISTORY"
+              ],
+              "properties": {
+                "customer_id": "customer_for_A-1043",
+                "history_id": "history_for_A-1043"
+              },
+              "source_node_identifier": "riUAAAANAAAApgAAAAAAAAAArBMAAABjdXN0b21lcl9mb3JfQS0xMDQz"
+            },
+            {
+              "identifier": "riQAAAANAAAApgMAAAAAAAAArBIAAABoaXN0b3J5X2Zvcl9BLTEwNDM=",
+              "kind": "node",
+              "labels": [
+                "RefundHistory"
+              ],
+              "properties": {
+                "history_id": "history_for_A-1043",
+                "prior_refunds_12mo": 1
+              }
+            }
+          ]
+        }
+      ],
+      "total_bytes_processed": 172,
+      "cache_hit": false
+    }
+  },
+  "case": {
+    "order_id": "A-1043",
+    "item": "trail running shoes",
+    "amount_usd": 62.0,
+    "placed_days_ago": 12,
+    "payment_id": "payment_for_A-1043",
+    "method": "visa",
+    "settled": true,
+    "chargeback_open": false,
+    "customer_id": "customer_for_A-1043",
+    "account_age_days": 412,
+    "prior_refunds_12mo": 1,
+    "policy_route": "MANUAL_REVIEW",
+    "decision_reason": "Automatic approval requires an amount under $50 and fewer than 3 prior refunds; this case needs review.",
+    "decision": "DECLINED",
+    "reviewer_note": "The reviewer declined the discretionary exception for this demonstration."
+  },
+  "message": "Regarding your refund request for order A-1043 in the amount of $62.00, your request has been declined. The reviewer declined the discretionary exception for this demonstration.",
+  "error": null,
+  "model_enabled": true
+}

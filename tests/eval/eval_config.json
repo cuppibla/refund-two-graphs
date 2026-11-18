@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "rubric_based_final_response_quality_v1": {
+      "threshold": 1.0,
+      "judgeModelOptions": {
+        "judgeModel": "refund_demo_judge",
+        "numSamples": 1
+      },
+      "rubrics": [
+        {
+          "rubricId": "decision",
+          "rubricContent": {
+            "textProperty": "The reply names order A-1043 and the amount $62, and preserves the decision in the supplied JSON: APPROVED or DECLINED."
+          }
+        },
+        {
+          "rubricId": "grounding",
+          "rubricContent": {
+            "textProperty": "The reply gives the reviewer_note as the reason, without inventing policy, dates, past transactions, or additional customer facts. It may paraphrase the note."
+          }
+        },
+        {
+          "rubricId": "payment_boundary",
+          "rubricContent": {
+            "textProperty": "The reply never claims money was sent, processed, refunded, or received and never promises an arrival time. If approved, it explicitly says payment processing has not been performed in this demo."
+          }
+        }
+      ]
+    }
+  }
+}

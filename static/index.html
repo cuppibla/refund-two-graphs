@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>One refund, two graphs</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header><div class="brand"><span class="mark">↗</span> GRAPH ENGINEERING <span class="edition">A working example</span></div><span class="connection" id="connection">Connecting to BigQuery</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">ONE REFUND · TWO GRAPHS</p><h1>Can we approve this refund?</h1><p class="lead">Follow the decision process. Look inside its data. Connect the two.</p></div><div class="case-chip"><span>ORDER</span><strong>A-1043</strong><small>Original teaching fixture</small></div></section>
+    <nav aria-label="Teaching views">
+      <button class="tab selected" data-view="workflow">01 <span>Control the steps</span></button>
+      <button class="tab" data-view="data">02 <span>Connect the data</span></button>
+      <button class="tab" data-view="together">03 <span>Put them together</span></button>
+    </nav>
+    <div class="workspace">
+      <section class="visual">
+        <div class="panel-heading"><div><p class="eyebrow" id="graphKind">ADK WORKFLOW</p><h2 id="graphTitle">Which step should run next?</h2></div><div class="diagram-actions"><button class="secondary" id="refresh">Read graph</button><button class="secondary" id="expand" aria-pressed="false">Expand diagram</button></div></div>
+        <div id="diagram" class="diagram" aria-label="Interactive graph diagram"></div>
+        <div class="legend"><span><i class="data-dot"></i>Data record</span><span><i class="function-dot"></i>Function</span><span><i class="review-dot"></i>Reviewer</span><span><i class="model-dot"></i>Model</span><span class="legend-note">Click a node to inspect it</span></div>
+        <div class="caption" id="caption">An edge here controls execution. Only the selected response branch runs.</div>
+      </section>
+      <aside class="inspector">
+        <p class="eyebrow">INSPECT THE EVIDENCE</p><h2 id="inspectTitle">The same case throughout</h2>
+        <div id="facts"><p class="muted">Reading the original case from BigQuery…</p></div>
+        <details id="queryDetails"><summary>Query and execution record</summary><pre id="query">Waiting for a query result.</pre></details>
+      </aside>
+    </div>
+    <section class="run-panel">
+      <div class="run-top"><div><p class="eyebrow">RUN THE CONNECTED SYSTEM</p><h2 id="runTitle">From facts to a decision</h2></div><div class="controls"><label for="orderId">Order</label><input id="orderId" value="A-1043" maxlength="64" aria-label="Order ID"><button id="run">Run refund check <span>→</span></button></div></div>
+      <div class="policy"><strong>Demo policy</strong><span>Over 30 days or an open chargeback → decline</span><span>Otherwise, under $50 and fewer than 3 prior refunds → approve</span><span>All other cases → review</span></div>
+      <div id="error" role="alert" hidden></div>
+      <div class="execution-grid">
+        <div><div class="trace-title"><h3>Execution trace</h3><span id="runStatus">Ready</span></div><ol id="trace"><li class="placeholder">Run the check to see actual events from the ADK workflow.</li></ol></div>
+        <div class="outcome">
+          <div id="review" hidden><p class="eyebrow amber">REVIEW REQUIRED</p><h3>This $62 case needs a decision.</h3><p>The workflow is paused. Choose an outcome to resume it.</p><label for="note">Reviewer's reason</label><textarea id="note" maxlength="500" placeholder="Enter your reason for approving or declining this case."></textarea><div class="review-actions"><button id="approve">Approve</button><button class="secondary" id="decline">Decline</button></div></div>
+          <div id="draftSection"><p class="eyebrow">CUSTOMER RESPONSE DRAFT</p><p id="draft" class="draft empty">The model writes this after the decision. Nothing has been sent.</p></div>
+        </div>
+      </div>
+    </section>
+    <footer><span>Demo data from the original refund example. The history record is a summary, not a list of invented transactions.</span><span>Live reads · Local sessions · No payment or email actions</span></footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
